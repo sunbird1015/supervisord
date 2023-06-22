@@ -5,8 +5,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ochinchina/supervisord/config"
 	log "github.com/sirupsen/logrus"
+	"github.com/sunbird1015/supervisord/config"
 )
 
 // Manager manage all the process in the supervisor

@@ -14,10 +14,10 @@ import (
 
 	"github.com/gorilla/rpc"
 	"github.com/ochinchina/gorilla-xmlrpc/xml"
-	"github.com/ochinchina/supervisord/process"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
+	"github.com/sunbird1015/supervisord/process"
 )
 
 // XMLRPC mange the XML RPC servers

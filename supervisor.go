@@ -8,14 +8,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ochinchina/supervisord/config"
-	"github.com/ochinchina/supervisord/events"
-	"github.com/ochinchina/supervisord/faults"
-	"github.com/ochinchina/supervisord/logger"
-	"github.com/ochinchina/supervisord/process"
-	"github.com/ochinchina/supervisord/signals"
-	"github.com/ochinchina/supervisord/types"
-	"github.com/ochinchina/supervisord/util"
+	"github.com/sunbird1015/supervisord/config"
+	"github.com/sunbird1015/supervisord/events"
+	"github.com/sunbird1015/supervisord/faults"
+	"github.com/sunbird1015/supervisord/logger"
+	"github.com/sunbird1015/supervisord/process"
+	"github.com/sunbird1015/supervisord/signals"
+	"github.com/sunbird1015/supervisord/types"
+	"github.com/sunbird1015/supervisord/util"
 
 	log "github.com/sirupsen/logrus"
 )

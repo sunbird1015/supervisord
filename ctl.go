@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	"github.com/jessevdk/go-flags"
-	"github.com/ochinchina/supervisord/config"
-	"github.com/ochinchina/supervisord/types"
-	"github.com/ochinchina/supervisord/xmlrpcclient"
+	"github.com/sunbird1015/supervisord/config"
+	"github.com/sunbird1015/supervisord/types"
+	"github.com/sunbird1015/supervisord/xmlrpcclient"
 )
 
 // CtlCommand the entry of ctl command

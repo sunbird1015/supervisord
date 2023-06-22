@@ -1,4 +1,4 @@
-module github.com/ochinchina/supervisord/signals
+module github.com/sunbird1015/supervisord/signals
 
 go 1.16
 

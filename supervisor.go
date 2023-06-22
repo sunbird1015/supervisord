@@ -1,4 +1,4 @@
-package main
+package supervisord
 
 import (
 	"fmt"
@@ -327,6 +327,10 @@ func (s *Supervisor) StopProcessGroup(r *http.Request, args *StartProcessArgs, r
 		}
 	}
 	return nil
+}
+
+func (s *Supervisor) StopAllProc() {
+	s.procMgr.StopAllProcesses()
 }
 
 // StopAllProcesses stop all programs managed by supervisor

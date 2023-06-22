@@ -1,6 +1,7 @@
+//go:build !windows && !freebsd
 // +build !windows,!freebsd
 
-package main
+package supervisord
 
 import (
 	"fmt"

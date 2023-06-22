@@ -43,10 +43,9 @@ func initSignals(s *supervisord.Supervisor) {
 	go func() {
 		sig := <-sigs
 		log.WithFields(log.Fields{"signal": sig}).Info("receive a signal to stop all process & exit")
-		s.procMgr.StopAllProcesses()
+		s.StopAllProc()
 		os.Exit(-1)
 	}()
-
 }
 
 var options Options
@@ -158,7 +157,7 @@ func getSupervisordLogFile(configFile string) string {
 }
 
 func main() {
-	supervisord.ReapZombie()
+	ReapZombie()
 
 	// when execute `supervisord` without sub-command, it should start the server
 	parser.Command.SubcommandsOptional = true
@@ -167,7 +166,7 @@ func main() {
 			log.SetOutput(os.Stdout)
 			if options.Daemon {
 				logFile := getSupervisordLogFile(options.Configuration)
-				supervisord.Daemonize(logFile, runServer)
+				Daemonize(logFile, runServer)
 			} else {
 				runServer()
 			}

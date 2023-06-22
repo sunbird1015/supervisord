@@ -1,4 +1,4 @@
-package main
+package supervisord
 
 import (
 	"net/http"

@@ -1,7 +1,7 @@
 //go:build release
 // +build release
 
-package main
+package supervisord
 
 import (
 	"embed"

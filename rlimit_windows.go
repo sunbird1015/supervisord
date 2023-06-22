@@ -1,6 +1,7 @@
+//go:build windows
 // +build windows
 
-package main
+package supervisord
 
 func (s *Supervisor) checkRequiredResources() error {
 	return nil

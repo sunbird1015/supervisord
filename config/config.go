@@ -90,6 +90,7 @@ func (c *Entry) String() string {
 // Config memory representation of supervisor configuration file
 type Config struct {
 	configFile string
+	configObj  *ConfObj // 20230623 add to support config object
 	// mapping between the section name and configuration entry
 	entries map[string]*Entry
 
@@ -103,7 +104,7 @@ func NewEntry(configDir string) *Entry {
 
 // NewConfig creates Config object
 func NewConfig(configFile string) *Config {
-	return &Config{configFile, make(map[string]*Entry), NewProcessGroup()}
+	return &Config{configFile, nil, make(map[string]*Entry), NewProcessGroup()}
 }
 
 // create a new entry or return the already-exist entry
@@ -117,9 +118,12 @@ func (c *Config) createEntry(name string, configDir string) *Entry {
 	return entry
 }
 
-//
 // Load the configuration and return loaded programs
 func (c *Config) Load() ([]string, error) {
+	if c.configObj != nil { // 20230623 add to support config object
+		fmt.Println("load from obj")
+		return c.LoadObj()
+	}
 	myini := ini.NewIni()
 	c.ProgramGroup = NewProcessGroup()
 	log.WithFields(log.Fields{"file": c.configFile}).Info("load configuration from file")
@@ -405,7 +409,8 @@ func parseEnvFiles(s string) *map[string]string {
 }
 
 // GetEnv returns slice of strings with keys separated from values by single "=". An environment string example:
-//  environment = A="env 1",B="this is a test"
+//
+//	environment = A="env 1",B="this is a test"
 func (c *Entry) GetEnv(key string) []string {
 	value, ok := c.keyValues[key]
 	result := make([]string, 0)
@@ -426,7 +431,9 @@ func (c *Entry) GetEnv(key string) []string {
 }
 
 // GetEnvFromFiles returns slice of strings with keys separated from values by single "=". An envFile example:
-//  envFiles = global.env,prod.env
+//
+//	envFiles = global.env,prod.env
+//
 // cat global.env
 // varA=valueA
 func (c *Entry) GetEnvFromFiles(key string) []string {
@@ -512,7 +519,6 @@ func (c *Entry) GetStringArray(key string, sep string) []string {
 //	logSize=1GB
 //	logSize=1KB
 //	logSize=1024
-//
 func (c *Entry) GetBytes(key string, defValue int) int {
 	v, ok := c.keyValues[key]
 

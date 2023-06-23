@@ -444,6 +444,7 @@ func (s *Supervisor) Reload(restart bool) (addedGroup []string, changedGroup []s
 	prevProgGroup := s.config.ProgramGroup.Clone()
 
 	loadedPrograms, err := s.config.Load()
+	s.config.Print()
 
 	if checkErr := s.checkRequiredResources(); checkErr != nil {
 		log.Error(checkErr)

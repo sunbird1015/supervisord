@@ -19,8 +19,14 @@ require (
 )
 
 require (
+	go.opentelemetry.io/otel v1.7.0 // indirect
+	go.opentelemetry.io/otel/trace v1.7.0 // indirect
+)
+
+require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
+	github.com/gogf/gf/v2 v2.4.4
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect

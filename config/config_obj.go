@@ -89,6 +89,7 @@ func (c *Config) LoadObj() ([]string, error) {
 			c.entries[group_name_with_pref] = entry
 		}
 	}
+	loaded_progs := make([]string, 0)
 	if c.configObj.Programs != nil {
 		default_conf, _ := c.configObj.Programs["default"]
 		for name, conf := range c.configObj.Programs {
@@ -171,12 +172,13 @@ func (c *Config) LoadObj() ([]string, error) {
 				entry.keyValues["process_num"] = fmt.Sprintf("%d", i)
 
 				entry.Name = "program:" + procName
+				loaded_progs = append(loaded_progs, procName)
 				entry.Group = c.ProgramGroup.GetGroup(programName, programName)
 				c.entries[procName] = entry
 			}
 		}
 	}
-	return c.GetProgramNames(), nil
+	return loaded_progs, nil
 }
 
 func (c *Config) Print() {

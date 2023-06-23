@@ -159,7 +159,7 @@ func (c *Config) LoadObj() ([]string, error) {
 						procName = procName + "_" + fmt.Sprintf("%d", i)
 					}
 				}
-				proc_name_env := "PROC_NAME=\"" + procName + "\""
+				proc_name_env := "PROC_NAME=\"" + name + "\",INST_NAME=\"" + procName + "\""
 				if env_vl, ok := entry.keyValues["environment"]; ok && env_vl != "" {
 					entry.keyValues["environment"] = env_vl + "," + proc_name_env
 				} else {

@@ -120,8 +120,14 @@ func (c *Config) createEntry(name string, configDir string) *Entry {
 
 // Load the configuration and return loaded programs
 func (c *Config) Load() ([]string, error) {
+	if strings.HasSuffix(c.configFile, ".yaml") || strings.HasSuffix(c.configFile, ".yml") {
+		log.WithFields(log.Fields{"file": c.configFile}).Info("load configuration from file")
+		if err := c.LoadYmlConfig(); err != nil {
+			return nil, err
+		}
+	}
 	if c.configObj != nil { // 20230623 add to support config object
-		fmt.Println("load from obj")
+		log.Info("load from config obj")
 		return c.LoadObj()
 	}
 	myini := ini.NewIni()

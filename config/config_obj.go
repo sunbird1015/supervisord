@@ -2,8 +2,10 @@ package config
 
 import (
 	"fmt"
+	"io/ioutil"
 	"strings"
 
+	"github.com/gogf/gf/v2/encoding/gyaml"
 	"github.com/gogf/gf/v2/util/gconv"
 	log "github.com/sirupsen/logrus"
 )
@@ -25,6 +27,21 @@ func (c *Config) SetConfigObj(config_obj interface{}) error {
 		fmt.Println("config obj is:", c.configObj)
 	}
 	return nil
+}
+
+func (c *Config) LoadYmlConfig() error {
+	if file_data, err := ioutil.ReadFile(c.configFile); err == nil {
+		json_doc := make(map[string]interface{})
+		err = gyaml.DecodeTo(file_data, json_doc)
+		if err != nil {
+			return err
+		}
+		c.configObj = new(ConfObj)
+		gconv.Struct(json_doc, c.configObj)
+		return nil
+	} else {
+		return err
+	}
 }
 
 func obj_copy(obj map[string]interface{}) map[string]interface{} {

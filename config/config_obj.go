@@ -110,6 +110,9 @@ func (c *Config) LoadObj() ([]string, error) {
 	if c.configObj.Programs != nil {
 		default_conf, _ := c.configObj.Programs["default"]
 		for name, conf := range c.configObj.Programs {
+			if name == "default" {
+				continue
+			}
 			// get the number of processes
 			numProcs := gconv.Int(conf["numprocs"])
 			if numProcs <= 0 {

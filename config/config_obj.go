@@ -109,6 +109,16 @@ func (c *Config) LoadObj() ([]string, error) {
 	loaded_progs := make([]string, 0)
 	if c.configObj.Programs != nil {
 		default_conf, _ := c.configObj.Programs["default"]
+		if m, ok := default_conf["environment"].(map[string]interface{}); ok {
+			env_str := ""
+			for k, v := range m {
+				if env_str != "" {
+					env_str = env_str + ","
+				}
+				env_str = env_str + k + "=\"" + gconv.String(v) + "\""
+			}
+			default_conf["environment"] = env_str
+		}
 		for name, conf := range c.configObj.Programs {
 			if name == "default" {
 				continue
@@ -145,7 +155,11 @@ func (c *Config) LoadObj() ([]string, error) {
 				}
 				if default_conf != nil {
 					for k, v := range default_conf {
-						if _, ok := entry.keyValues[k]; !ok {
+						if prog_v, ok := entry.keyValues[k]; ok {
+							if k == "environment" {
+								entry.keyValues[k] = gconv.String(v) + "," + gconv.String(prog_v)
+							}
+						} else {
 							entry.keyValues[k] = gconv.String(v)
 						}
 					}
